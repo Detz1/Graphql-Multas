@@ -4,40 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta GraphQL</title>
-  <style>
-    /* Agrega estilos CSS según sea necesario para mejorar la presentación */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    input {
-      margin-bottom: 10px;
-    }
-    button {
-      padding: 8px;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -92,6 +59,9 @@
       return;
     }
 
+    // Sumar los montos de las multas
+    const totalMonto = data.multas.reduce((total, multa) => total + multa.monto, 0);
+
     resultDiv.innerHTML = `
       <div>
         <h2>Detalles del Usuario</h2>
@@ -124,6 +94,11 @@
               <td>${multa.descripcion}</td>
             </tr>
           `).join('')}
+          <tr>
+            <td colspan="1"><strong>Total:</strong></td>
+            <td>${totalMonto}</td>
+            <td></td>
+          </tr>
         </table>
       </div>
     `;
